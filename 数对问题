@@ -1,1 +1,12 @@
-
+def NumOfPairs(n,k):
+    if k == 0:
+        return n**2
+    else:
+        res = 0
+        for y in range(k+1,n+1):
+            res += (n/y)*(y-k)
+            if n % y >= k:
+                res += n%y-k+1
+        return res
+n,k = map(int,input().strip().split())
+print NumOfPairs(n,k)
