@@ -1,0 +1,7 @@
+n,m = map(int,input().split())
+c = list(map(int,input().split()))
+c.sort()
+cc = [0]*n
+for i in c:
+    cc[i-1] += 1
+print(min(cc))
