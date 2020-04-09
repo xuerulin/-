@@ -1,0 +1,22 @@
+#输入 6 3
+#    1 3 5 2 5 4
+#    1 1 0 1 0 0
+输出 16
+#遍历构建一个固定分值组，同时将元素组中的固定值变为0，同时构建一个state = 0的得分组进行遍历。
+n,k = map(int,input().split())
+values = list(map(int,input().split()))
+state =list(map(int,input().split()))
+base_score = 0
+for i in range(n):
+    if state[i]:
+        base_score += values[i]
+        values[i] = 0
+max_boost_score = 0
+for i in range(n):
+    if not state[i]:
+        boost_score = sum(values[i:min(i+k,n)])
+        max_boost_score = max(max_boost_score,boost_score)
+        if i+k-1 > k:
+            break
+score = base_score+max_boost_score
+print(score)
