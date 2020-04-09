@@ -1,0 +1,21 @@
+设state(i,w)表示i个零食放入背包小于等于W的个数，把state(i,w)分解，可以分解为两个情况：
+1、是第i个不放入时，前i-1个零食放入背包小于等于W的个数即state(i-1,w)；
+2、是在第i个放入的情况下，前i-1个零食放入背包体积小于等于W-v[i]的个数即state(i-1,w-v[i]);
+即               state(i,w) = state(i-1,w) + state(i-1,w-v[i])
+边界条件：i = 1时，state(1,w1) 此时如果w1 >0 且v[1]<=w1,state(1,w1) = 2,即有可放入和不放入两种；
+         i = 1 时，swate(1,w1)此时如果w1 >0且v[1] > w1,state(1,w1)=1,即只有不放入一种；
+         如果state(i,w)中出现w<=0,则state(i,w)=0; 
+                  解释源自： 牛客网： 番茄小西瓜
+n, w = map(int,input().split())
+lst = list(map(int,input().split()))
+lst.sort()
+print(func(lst,n,w))
+
+def func(lst,n,w):
+    if w < 0:
+        return 0
+    if w == 0:
+        return 1
+    if sum(lst) < w:
+        return 2**n
+    return func(lst[:n-1],n-1,w)+func(lst[:n-1],n-1,w-lst[n-1])
