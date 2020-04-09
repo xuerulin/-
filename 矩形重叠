@@ -1,0 +1,15 @@
+#遍历范围内的所有点，取最大值
+n = int(raw_input())
+x1 = map(int,raw_input().split())
+y1 = map(int,raw_input().split())
+x2 = map(int,raw_input().split())
+y2 = map(int,raw_input().split())
+
+res = 1
+for i in x1+x2:
+    for i in y1+y2:
+        count = 0
+        if x1[i] <= x <= x2[i] and y1[i] <= y <= y2[i]:
+            count += 1
+        res = max(res,count)
+print(res)
