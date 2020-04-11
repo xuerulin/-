@@ -1,0 +1,18 @@
+#5
+#2 7 3 4 9
+#3
+#1 25 11
+#输出1
+    #5
+    #3
+from bisect import bisect_left
+n = int(input())
+a = list(map(int,input()))
+m = int(input())
+q = list(map(int,input()))
+for i in range(n):
+    a[i] += a[i-1]
+res = []
+for j in range(m):
+    res.append(bisect_left(a,q[j])+1)
+    print(res[j])
