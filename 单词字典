@@ -1,0 +1,34 @@
+示例输入：
+2 2 6
+输出：
+zzaa
+排列组合：n个a和m个z能组成count(n+m,n)个单词
+1.假设第一个字符为a，则剩下n-1个'a'和m个'z'组成的子序列只能构成count(n-1+m,n-1)个单词，且是字典中前count(n-1+m,n-1)个单词。
+2.比较k和count(n-1+m,n-1)，若k小，说明k是前count(n-1+m,n-1)个单词，则第一个字符必为'a'。子问题化为在子序列(n-1个'a'和m个'z')找到第k个单词
+3.若k大，则说明第一个字符必为'z',单词是以'z'开头的单词中的第k-count(n-1+m,n-1)个。子问题化为在子序列(n个'a'和m-1个'z')找到第k-count(n+m-1,m-1)个单词。
+源自牛客网52Hz
+
+代码实现：
+n,m,k = map(int,input().split())
+import math
+def Cnm(n,m):
+    count = math.factorial(n+m)//(math.factorial(n)*math.factorial(m))
+    return count
+if Cnm(n,m) < k:
+    print(-1)
+else:
+    ans = ""
+    while n > 0 and m >0:
+        temp = Cnm(n-1,m)
+        if temp < k:
+            k -= temp
+            m -= 1
+            ans += "z"
+        else:
+            n -= 1
+            ans += "a"
+    ans += "a"*n
+    ans += "z"*m
+    print(ans)
+    
+        
