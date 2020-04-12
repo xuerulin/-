@@ -1,0 +1,23 @@
+输入示例：
+3 2
+5 8 5
+输出：
+0 2
+2 1
+2 3
+
+n,k = map(int,input().split())
+a = list(map(int,input().split()))
+res = []
+for i in range(k):
+    b,c = max(a),min(a)
+    if b - c <= 1:
+        break
+    max_index = a.index(b)
+    min_index = a.index(c)
+    a[max_index] -= 1
+    a[min_index] += 1
+    res.append(str(max_index+1)+" "+str(min_index+1))
+print(str(max(a)-max(b))+" "+str(len(res)))
+for j in res:
+    print(j)
