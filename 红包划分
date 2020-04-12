@@ -1,0 +1,20 @@
+n = int(input())
+d = list(map(int,input().split()))
+print (mostBonus(n,d))
+def mostBonus(n,d):
+    left,right= 0,n-1
+    sum_left,sum_right = d[0],d[n-1] 
+    res = 0
+    while left < right:
+        if sum_left == sum_right:
+            res = sum_left
+            left,right = left+1,right-1
+            sum_left += d[left]
+            sum_right += d[right]
+        elif sum_left < sum_right:
+            left += 1
+            sum_left += d[left]
+        else:
+            right -= 1
+            sum_right += d[right]
+    return res
