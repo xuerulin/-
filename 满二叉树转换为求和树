@@ -1,0 +1,20 @@
+输入示例：
+10 -2 8 -4 6 7 5
+8 -2 -4 10 7 6 5
+输出：
+0 4 0 20 0 12 0
+当二叉树为满二叉树时，中序遍历的中点一定是树的根
+当非满二叉树时，前序遍历的首个节点即为根节点，同时在中序遍历组中找到根节点的位置，将前序遍历与中序遍历分块，
+同时每块中的根节点在求和树中的值为块的sum减掉该根节点的值，调用递归方法继续进行求解
+def fuc(a,b):
+    if len(a) == 1:
+        return a[0]
+    elif len(a) == 0:
+        return []
+    mid = b.index(a[0])
+    b[mid] = sum(b[:]) - b[mid]
+    return fuc(a[1:(mid+1)],b[:mid]) + [sum(b[:]) - b[mid]] +fuc(a[(mid+1):],b[(mid+1):])
+a = list(map(int,input().strip().split()))
+b = list(map(int,input().strip().split()))
+ans = fuc(a,b)
+print(' '.join(map(str,ans)))
