@@ -1,0 +1,27 @@
+输入示例：
+5
+2 2
+2 4
+3 3
+2 5
+4 5
+输出示例：4
+
+from bisect import bisect
+n = int(input())
+bricks = []
+for _ in range(n):
+    w,l = map(int,input().strip().split())
+    bricks.append((w,l))
+bricks.sort()
+array = []
+for brick in bricks:
+    if not array:
+        array.append(brick[1])
+    elif aaray[-1] <= brick[1]:
+        array.append(brick[1])
+    else:
+        index = bisect(array,brick[1])
+        array[index] = brick[1]
+print(len(array))
+#存在一个问题，这里既然只输出array的长度即可，为何还需要通过二分查找进行替换呢？有懂的大佬能否补充一下！
